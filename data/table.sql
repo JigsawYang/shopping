@@ -41,8 +41,6 @@ CREATE TABLE `jx_user` (
     `id` int unsigned not null auto_increment primary key,
     `username` varchar(20) not null unique,
     `password` varchar(32) not null,
-    `sex` enum("男", "女", "保密") not null default "保密",
-    `face` varchar(50) not null,
     `regTime` int unsigned not null
 );
 

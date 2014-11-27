@@ -9,7 +9,7 @@ $verify1 = $_SESSION['verify'];
 if($verify1 == $vcode) {
     $adname = mysql_real_escape_string($adname);//防止SQL注入
     $sql = "select * from jx_admin where username='{$adname}' and password='{$password}'";
-    $row = check_admin($sql);
+    $row = checkAdmin($sql);
     if($row) {
         //如果选择了自动登录
         if($auto_flag) {

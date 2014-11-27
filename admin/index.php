@@ -1,8 +1,8 @@
 <?php
 require_once '../include.php';
-check_logined();
+checkLogined();
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">

@@ -1,12 +1,12 @@
 <?php
 //获取用户名
-function check_admin($sql) {
+function checkAdmin($sql) {
     return fetch_one($sql);
 }
 
 //检测是否登陆
 
-function check_logined() {
+function checkLogined() {
     if(@$_SESSION['adminid'] == "" && @$_SESSION['adminid'] == "") {
         alert_msg("请先登陆", "login.php");
     }

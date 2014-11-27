@@ -19,5 +19,8 @@ require_once 'admininc.php';
 require_once 'common.php';
 require_once 'pagefunc.php';
 require_once 'cateinc.php';
+require_once 'uploadfunc.php';
+require_once 'proinc.php';
+require_once 'album.php';
 connect();
 ?>

@@ -53,3 +53,9 @@ function delCate($id) {
     }
     return $res;
 }
+
+function getAllCate() {
+    $sql = "select id, cName from jx_cate";
+    $rows = fetch_all($sql);
+    return $rows;
+}

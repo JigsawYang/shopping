@@ -5,16 +5,38 @@
  * Date: 2014/11/26
  * Time: 14:02
  */
-$filename = ($_FILES['myfile']['name']);
+require_once "../lib/randstring.php";
+$filename = $_FILES['myfile']['name'];
 $type = $_FILES['myfile']['type'];
-$tmp_name = $_FILES['myfile']['type'];
+$tmp_name = $_FILES['myfile']['tmp_name'];
 $error = $_FILES['myfile']['error'];
 $size = $_FILES['myfile']['size'];
-
+$allowExt = array("jpg", "png", "jpeg");
+$ext = get_ext($filename);
+$maxSize = 1048576;
+$imgFlag = true;
 if($error == UPLOAD_ERR_OK) {
+    if(!in_array($ext, $allowExt)) {
+        exit("非法类型");
+    }
+    if($size > $maxSize) {
+        exit("文件过大");
+    }
+    if($imgFlag) {
+        $info = getimagesize($tmp_name);
+        if(!$info) {
+            exit("类型不对");
+        }
+    }
+    $filename = get_uni_name().".".$ext;//生成随机的文件名字
+
+    if(!file_exists($path)) {
+        mkdir($path, 0777, true);
+    }
+    $destination = $path."/".$filename;
     if(is_uploaded_file($tmp_name)) {
-        if(move_uploaded_file($filename, $destination)) {
-            
+        if(move_uploaded_file($tmp_name, $destination)) {
+            $res = "文件移动OK";
         } else {
             $res = "文件移动失败";
         }
@@ -45,3 +67,4 @@ if($error == UPLOAD_ERR_OK) {
             $res = "由于PHP的扩展程序终端了上传";
     }
 }
+echo $res;

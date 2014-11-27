@@ -5,8 +5,10 @@
     <title>Document</title>
 </head>
 <body>
-<form action="doAction.php" method="post" enctype="multipart/form-data">
-    <input type="file" name="myfile"/>
+<form action="do2.php" method="post" enctype="multipart/form-data">
+    <input type="file" name="myfile[]" />
+    <input type="file" name="myfile[]" />
+    <input type="file" name="myfile1" />
     <input type="submit" value="lxlxl"/>
 </form>
 </body>

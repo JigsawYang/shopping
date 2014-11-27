@@ -84,7 +84,7 @@ function fetch_one($sql, $result_type = MYSQL_ASSOC) {
 function fetch_all($sql, $result_type = MYSQL_ASSOC) {
     $result = mysql_query($sql);
     while (@$row = mysql_fetch_array($result, $result_type)) {
-        $rows[] = $row;
+        @$rows[] = $row;
     }
     return $rows;
 }
@@ -97,4 +97,8 @@ function fetch_all($sql, $result_type = MYSQL_ASSOC) {
 function get_result_num($sql) {
     $result = mysql_query($sql);
     return mysql_num_rows($result);
+}
+
+function get_insert_id() {
+    return mysql_insert_id();
 }

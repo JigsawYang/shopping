@@ -7,6 +7,12 @@
  */
 require_once 'randstring.php';
 
+/**
+ * 产生验证码
+ * @param int $type
+ * @param int $length
+ * @param string $sess_name
+ */
 function verify_image($type = 3, $length = 4, $sess_name = "verify") {
     session_start();
     $width = 80;
@@ -48,3 +54,30 @@ function verify_image($type = 3, $length = 4, $sess_name = "verify") {
     imagegif ( $image );
     imagedestroy ( $image );
 }
+
+function thumb($filename, $destination = null, $dst_w = null, $dst_h = null, $is_drop_source = false, $scale = 0.5) {
+    list($src_w, $src_h, $imagetype) = getimagesize($filename);
+    if(is_null($dst_w) || is_null($dst_h)) {
+        $dst_w = ceil($scale * $src_w);
+        $dst_h = ceil($scale * $src_h);
+    }
+    $mime = image_type_to_mime_type($imagetype);
+    $create_fun = str_replace("/", "createfrom", $mime);
+    $out_put = str_replace("/", null, $mime);
+    $src_image = $create_fun($filename);
+    $dst_image = imagecreatetruecolor($dst_w, $dst_h);
+
+    imagecopyresampled($dst_image, $src_image, 0, 0, 0, 0, $dst_w, $dst_h, $src_w, $src_h);
+    if($destination && !file_exists(dirname($destination))) {
+        mkdir(dirname($destination), 0777, true);
+    }
+    $dst_filename = $destination == null ? get_uni_name(). "." .get_ext($filename) : $destination;
+    $out_put($dst_image, $dst_filename);
+    imagedestroy($src_image);
+    imagedestroy($dst_image);
+    if($is_drop_source) {
+        unlink($filename);
+    }
+    return $dst_filename;
+}
+

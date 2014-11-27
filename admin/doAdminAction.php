@@ -24,7 +24,12 @@ if($act == "logout") {
     $res = editCate($id);
 } elseif($act == "delCate") {
     $res = delCate($id);
+} elseif($act == "addPro") {
+    $res = addPro();
+} elseif($act == "editPro") {
+    $res = editPro($id);
 }
+
 ?>
 
 <!DOCTYPE html>
